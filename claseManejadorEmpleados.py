@@ -81,6 +81,8 @@ class ManejadorEmpleados:
         print('Empleados externos cargados.')
     def Carga(self):
         cant = int(input('Ingrese cantidad de empleados en total:'))
+        if cant < 16:
+            print('Atencion, el numero ingresado es menor a 16. Esto puede producir errores ya que el archivo es mas grande.')
         self.__dimension = cant
         self.__arreEmpleados.resize(cant)
         self.CargaEmpPlanta()
@@ -114,10 +116,12 @@ class ManejadorEmpleados:
         elif op == 3:
             tarea = 'Plomeria'
         total = 0.0 # Acumulador para calcular el monto total.
+        fechaActual = date.today() # Fecha actual para determinar si hay tareas no finalizadas.
         for i in range(len(self.__arreEmpleados)):
             if isinstance(self.__arreEmpleados[i], EmpleadoExterno):
-                if self.__arreEmpleados[i].GetTarea() == tarea:
-                    total += self.__arreEmpleados[i].GetSueldo()
+                if self.__arreEmpleados[i].GetTarea() == tarea:                  
+                    if self.__arreEmpleados[i].GetFechaFin() > fechaActual: 
+                        total += self.__arreEmpleados[i].GetSueldo()
         print('Monto total a pagar por la tarea {} : {}'.format(str(tarea),float(total)))
         print('--------------------------------------')
     def Ayuda(self): # Consigna 3
@@ -133,7 +137,7 @@ class ManejadorEmpleados:
         print('Nombre | Telefono | Sueldo a cobrar')
         print('--------------------------------------')
         for i in range(len(self.__arreEmpleados)):
-            print('{} | {} | {}',format(str(self.__arreEmpleados[i].GetNombre()),str(self.__arreEmpleados[i].GetTelefono()),float(self.__arreEmpleados[i].GetSueldo())))
+            print('{} | {} | {}'.format(str(self.__arreEmpleados[i].GetNombre()),str(self.__arreEmpleados[i].GetTelefono()),float(self.__arreEmpleados[i].GetSueldo())))
         print('--------------------------------------')
     def MostrarTodos(self): # Opcional para ver toda la informacion del arreglo
         print('Todos los empleados.')
@@ -147,6 +151,7 @@ class ManejadorEmpleados:
                 print('Fecha de inicio:',self.__arreEmpleados[i].GetFechaInicio())
                 print('Fecha de finalizacion:',self.__arreEmpleados[i].GetFechaFin())
                 print('Cantidad de horas trabajadas:',self.__arreEmpleados[i].GetCantidadHoras())
+                print('Sueldo:',self.__arreEmpleados[i].GetSueldo())
                 print('Valor por hora:$',self.__arreEmpleados[i].GetValorHora())
                 print('--------------------------------------')
             if isinstance(self.__arreEmpleados[i],EmpleadoPlanta):
@@ -157,7 +162,7 @@ class ManejadorEmpleados:
                 print('Telefono:',self.__arreEmpleados[i].GetTelefono())
                 print('Sueldo basico:$',self.__arreEmpleados[i].GetSueldoBasico())
                 print('Antiguedad:',self.__arreEmpleados[i].GetAntiguedad())
-                print('Sueldo total:$',self.__arreEmpleados[i].GetSueldoTotal())
+                print('Sueldo total:$',self.__arreEmpleados[i].GetSueldo())
                 print('--------------------------------------')
             if isinstance(self.__arreEmpleados[i],EmpleadoExterno):
                 print('Empleado externo.')
@@ -172,3 +177,5 @@ class ManejadorEmpleados:
                 print('Costo de obra: $',self.__arreEmpleados[i].GetCostoObra())
                 print('Monto de seguro de vida:$',self.__arreEmpleados[i].GetMontoSeguro())
                 print('--------------------------------------')
+    def ModificaValorHora(self):
+        EmpleadoContratado.SetValorHora()
