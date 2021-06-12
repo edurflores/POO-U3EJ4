@@ -14,9 +14,12 @@ class EmpleadoExterno(Empleado):
         self.__tarea = tar
         self.__fechainicio = fechaini
         self.__fechafin = fechafi
-        self.__montoViatico = monviati
-        self.__costoObra = costo
-        self.__montoSeguro = monseguro
+        if type(monviati) is float:
+            self.__montoViatico = monviati
+        if type(costo) is float:
+            self.__costoObra = costo
+        if type(monseguro) is float:
+            self.__montoSeguro = monseguro
         self.__sueldo = self.__costoObra - self.__montoViatico - self.__montoSeguro
     def GetTarea(self):
         return self.__tarea
