@@ -6,6 +6,8 @@ if __name__ == '__main__':
     me.Carga()
     print('Menu')
     print('1- Registrar horas.\n2- Total de tarea.\n3- Ayuda.\n4- Calcular sueldo.\n0- Salir.')
+    print('Opciones adicionales')
+    print('6- Mostrar todo el archivo.\n7- Modificar valor por hora (Empleados contratados).')
     op = int(input('Seleccione opcion:'))
     while op != 0:
         if op == 1:
@@ -18,13 +20,17 @@ if __name__ == '__main__':
             me.CalcularSueldo()
         elif op == 0:
             print('Saliendo del programa.')
-        elif op == 6:
-            me.MostrarTodos() # Opcional
+        elif op == 6: # Ahora opciones adicionales.
+            me.MostrarTodos()
+        elif op == 7:
+            me.ModificaValorHora()
         print('Menu')
         print('1- Registrar horas.\n2- Total de tarea.\n3- Ayuda.\n4- Calcular sueldo.\n0- Salir.')
+        print('Opciones adicionales')
+        print('6- Mostrar todo el archivo.\n7- Modificar valor por hora (Empleados contratados).')
         op = int(input('Seleccione opcion:'))
         
     # Nota: Por requerimiento de consigna,
     # deben introducirse la cantidad de empleados por teclado. Se incluyen 3 archivos de empleados.
-    # Cada uno tiene 5 empleados para usar como lote de pruebas. Siendo un total 15 empleados.
-    # Se recomienda ingresar 15 para que funcione el programa. Ingresar menos que eso podría producir error.
+    # Dos archivos tienen 5 empleados y uno tiene 6 para usar como lote de pruebas. Siendo un total de 16 empleados.
+    # Se recomienda ingresar 16 para que funcione el programa. Ingresar menos que eso podría producir error.
