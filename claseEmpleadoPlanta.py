@@ -6,12 +6,14 @@ class EmpleadoPlanta(Empleado):
     __sueldototal = 0.0 # A calcular
     def __init__(self,docu,nom,direc,tel,sueldoba,anti):
         super().__init__(docu, nom, direc, tel)
-        self.__sueldoBasico = sueldoba
-        self.__antiguedad = anti
-        self.__sueldototal = self.__sueldoBasico + ((self.__sueldoBasico * 1)/100) * self.__antiguedad
+        if type(sueldoba) is float:
+            self.__sueldoBasico = sueldoba
+        if type(anti) is int:
+            self.__antiguedad = anti
     def GetSueldoBasico(self):
         return self.__sueldoBasico
     def GetAntiguedad(self):
         return self.__antiguedad
-    def GetSueldoTotal(self):
+    def GetSueldo(self): # Es el sueldo total
+        self.__sueldototal = self.__sueldoBasico + ((self.__sueldoBasico * 1)/100) * self.__antiguedad
         return self.__sueldototal
